@@ -83,12 +83,6 @@
                         file_path: 'content.json',
                         commit_message: 'update',
                         content: JSON.stringify(bookmarks),
-                        sha: '',
-                        start_branch: '',
-                        encoding: '',
-                        author_email: '',
-                        author_name: '',
-                        last_commit_id:'',
                     };
                     var newopt = $.extend({}, opt, opts);
                     var controller = $.fn.getGitLabController(newopt);

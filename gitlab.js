@@ -2,10 +2,12 @@
 //这就相当于定义了一个参数为arg的匿名函数，然后用param作为参数来调用这个匿名函数
 (function ($, window, document, undefined) {
     $.put = function (url, data, callback) {
+        var finalData = { branch: data.branch, commit_message: data.commit_message, private_token: data.token, content: data.content };
         return $.ajax({
             type: "put",
             url: url,
-            data: data,
+            data: finalData,//{ branch: 'master', commit_message: 'update', private_token: 'sE6t7B4owedcSXXG5FLo', content: 'asdasd' },
+            //contentType: "application/json;charset=utf-8",
             success: function (res) {
                 callback && callback(null, res);
             },
@@ -57,7 +59,6 @@
                     for (pc = 0; pc < res.length; pc++) {
                         if (res[pc].name == opt.projectname) {
                             opt.projectid = res[pc].id;
-                            //$this.getFileInfo(opt);
                         }
                     }
                 },
@@ -77,7 +78,6 @@
                 url: 'https://gitlab.com/api/v4/projects/' + opt.projectid + '/repository/files/' + encodeFilePath + '?ref=master&private_token=' + opt.token,
                 dataType: 'text',
                 success: function (res) {
-                    //console.log(res);
                     fileinfo= res;
                     //var base64 = new Base64();
                     //console.log(base64.decode(res['content']));
@@ -95,17 +95,15 @@
                 file_path: '',
                 message: '',
                 content: '',
-                sha: '',
                 commit_message:''
             }, _opts);
             var data = JSON.stringify(opt);
             var encodeFilePath = encodeURI(opt.file_path);
             var url = 'https://gitlab.com/api/v4/projects/' + opt.projectid
-                + '/repository/files/' + encodeFilePath
-                + '?branch=master&commit_message=' + opt.commit_message
-                + '&private_token=' + opt.token + '&content=' + opt.content;
-            console.log(data);
-            $.put(url, data, cb);
+                + '/repository/files/' + encodeFilePath;
+                //+ '?branch=master&commit_message=' + opt.commit_message
+                //+ '&private_token=' + opt.token + '&content=' + opt.content;
+            $.put(url, opt, cb);
             return this;
         },
 
