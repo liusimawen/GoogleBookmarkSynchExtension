@@ -24,7 +24,7 @@
             token: '',
             projectid: '',
             projectname: '',
-            filename: '',
+            file_path: '',
             callback: function () { },
         };
         this.options = $.extend({}, this.defaults, opt);
@@ -71,14 +71,16 @@
         getFileInfo: function (opt) {
             $this = this;
             var fileinfo;
-            var encodeFilePath = encodeURI(opt.filename + '/raw');
+            var encodeFilePath = encodeURI(opt.file_path + '/raw');
             $.ajax({
                 type: "GET",
                 async: false,
                 url: 'https://gitlab.com/api/v4/projects/' + opt.projectid + '/repository/files/' + encodeFilePath + '?ref=master&private_token=' + opt.token,
                 dataType: 'text',
                 success: function (res) {
-                    fileinfo= res;
+                    var base64 = new Base64();
+                    var dec = base64.decode(res);
+                    fileinfo= dec;
                     //var base64 = new Base64();
                     //console.log(base64.decode(res['content']));
                 },
@@ -99,6 +101,10 @@
             }, _opts);
             var data = JSON.stringify(opt);
             var encodeFilePath = encodeURI(opt.file_path);
+            //base64编码，防止泄露
+            var base64 = new Base64();
+            opt.content=base64.encode(opt.content);
+            console.log(encodeFilePath);
             var url = 'https://gitlab.com/api/v4/projects/' + opt.projectid
                 + '/repository/files/' + encodeFilePath;
                 //+ '?branch=master&commit_message=' + opt.commit_message

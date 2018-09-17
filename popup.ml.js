@@ -57,14 +57,14 @@
                 this.$divTip.text(result).show();
                 return;
             }
-            //this.$loading.show();
+            this.$loading.show();
             // 
             var paths = formObj.path.split('/'),
                 repo = paths[0],
                 path = formObj.path.replace(repo + '/', ''),
                 opts = {
                     projectname: repo,
-                    filename: path,
+                    file_path: path,
                     username: formObj.username,
                     token: formObj.token
                 };
@@ -77,10 +77,9 @@
                         token: '',
                         projectid: '',
                         projectname: '',
-                        filename: '',
                         callback: function () { },
                         branch: 'master',
-                        file_path: 'content.json',
+                        file_path: '',
                         commit_message: 'update',
                         content: JSON.stringify(bookmarks),
                     };
@@ -117,16 +116,16 @@
                     token: 'sE6t7B4owedcSXXG5FLo',
                     projectid: '',
                     projectname: 'testbookmarks',
-                    filename: 'content.json',
+                    file_path: '',
                     callback: function () { },
                 };
                 var newopt = $.extend({}, opt, opts);
-                console.log(newopt);
+                //console.log(newopt);
                 var controller = $.fn.getGitLabController(newopt);
                 newopt = controller.getUserId(newopt);
                 newopt = controller.getUserProjects(newopt);
                 var fileinfo = controller.getFileInfo(newopt);
-                console.log(fileinfo);
+                //console.log(fileinfo);
                 var J_fileinfo = JSON.parse(fileinfo);
                 that.setBookmarks(J_fileinfo, function () {
                     that.$loading.hide();
@@ -340,3 +339,7 @@
         return obj;
     }
 })(jQuery, window, document);
+//初始化控件
+$(function () {
+    var pageconc = $.fn.getPageController();
+});
