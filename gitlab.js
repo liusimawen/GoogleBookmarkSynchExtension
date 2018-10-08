@@ -19,7 +19,7 @@
     var gitLabController = window.gitLabController = function(ele,opt){
         this.$element = ele;//这个ele就是之后调用时选择器选择的对象$('')
         this.defaults = {
-            username: '',
+            username: 'fsdf',
             userid: '',
             token: '',
             projectid: '',
