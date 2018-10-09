@@ -16,10 +16,52 @@
             }
         });
     };
+    $.delete = function (url, data, callback) {
+        return $.ajax({
+            type: "delete",
+            url: url,
+            data: data,
+            success: function (res) {
+                callback && callback(null, res);
+            },
+            error: function (xhr) {
+                callback && callback((xhr.responseJSON && xhr.responseJSON.message) || 'error');
+            }
+        });
+    }
+
+    $.get = function (url, data, callback) {
+        return $.ajax({
+            type: "get",
+            url: url,
+            data: data,
+            success: function (res) {
+                callback && callback(null, res);
+            },
+            error: function (xhr) {
+                callback && callback((xhr.responseJSON && xhr.responseJSON.message) || 'error');
+            }
+        });
+    }
+
+    $.post = function (url, data, callback) {
+        return $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            success: function (res) {
+                callback && callback(null, res);
+            },
+            error: function (xhr) {
+                callback && callback((xhr.responseJSON && xhr.responseJSON.message) || 'error');
+            }
+        });
+    };
+
     var gitLabController = window.gitLabController = function(ele,opt){
         this.$element = ele;//这个ele就是之后调用时选择器选择的对象$('')
         this.defaults = {
-            username: 'fsdf',
+            username: '',
             userid: '',
             token: '',
             projectid: '',
