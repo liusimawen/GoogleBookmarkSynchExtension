@@ -8,12 +8,12 @@
 ### gitlab新建Project[testbookmarks]，并添加保存书签的文件[test.json]<br>
 ![](./images/create-project.png)<br>
 ### 输入gitlab用户名，token，以及用以保存书签的文件的路径
-![](./images/popup.png)<br>
+<div style="align:center">![](./images/popup.png)</div><br>
 ### 初始使用，首先点击“upload”按钮，上传本地的书签数据。当切换电脑时，在新电脑上点击“download”按钮，会将gitlab上的书签覆盖至本地，
 达到书签同步的目的
 #### upload
-![](./images/upload.png)<br>
-![](./images/upload-success.png)<br>
+<div style="align:center">![](./images/upload.png)</div><br>
+<div style="align:center">![](./images/upload-success.png)</div><br>
 #### download
-![](./images/download.png)<br>
-![](./images/download-success.png)<br>
+<div style="align:center">![](./images/download.png)</div><br>
+<div style="align:center">![](./images/download-success.png)</div><br>
